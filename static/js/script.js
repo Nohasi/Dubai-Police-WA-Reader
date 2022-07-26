@@ -63,6 +63,9 @@ function uploadFiles(event) {
                 back_nav.show();
                 setFile({ 'chat': response.chat, 'users': response.users })
                 download_link.show();
+                from_cal.show();
+                to_cal.show();
+                search_item.show();
 
                 console.log("Chat Block count:" + response.chat.length);
                 console.log("Users count:" + response.users.length);
@@ -171,4 +174,7 @@ var files,
     form_file_field = $('#form_file_field'),
     error_div = $('#error_message_box'),
     back_nav = $('li.nav-back'),
-    download_link = $('li.download-link');
+    download_link = $('li.download-link'),
+    from_cal = $('li.from-cal')
+    to_cal = $('li.to-cal')
+    search_item = $('li.search-item');

@@ -34,13 +34,24 @@ def is_media_string(chat_string):
     return False, None
 
 
-def get_media_path(text_string, media_flag):
+def get_media_path(text_string, media_flag, platform="android"):
     if media_flag:
-        for text_segment in text_string.split():
-            tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", "")).replace(">", "")
+        if platform == "android":
+            for text_segment in text_string.split():
+                tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", ""))
+                print(tmp_filepath)
+                if os.path.exists(tmp_filepath):
+                    return tmp_filepath[1:]
+        else:
+            text_segment = text_string[text_string.index("<"):]
+            text_segment = re.search(r'<(.*?)>',text_segment).group(1)
+            text_segment = text_segment.split()[1].strip()
+            tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", ""))
             print(tmp_filepath)
             if os.path.exists(tmp_filepath):
                 return tmp_filepath[1:]
+
+
 
 
 def _get_parsed_line(input_line, persons_list, is_media_available=False):
@@ -81,7 +92,11 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False):
     if is_media_available:
         # For .zip files
         is_media_string_flag, media_message = is_media_string(text_string)
-        media_path = get_media_path(text_string, is_media_string_flag)
+        if media_message is not None:
+            if "<" in media_message:
+                media_path = get_media_path(text_string, is_media_string_flag, "iOS")
+            else:
+                media_path = get_media_path(text_string, is_media_string_flag, "android")
         if media_path:
             text_string = media_message
 

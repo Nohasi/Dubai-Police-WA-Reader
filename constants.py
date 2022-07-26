@@ -8,5 +8,5 @@ ATTACHMENT_MESSAGES = [
     "(الملف مرفق)",
     # IOS EN and AR
     "<attached:",
-    "<المُرفق: ",
+    "<المُرفق:",
 ]
