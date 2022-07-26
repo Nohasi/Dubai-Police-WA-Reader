@@ -29,9 +29,10 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item nav-back" style="display:none;"><a class="nav-link"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> View another chat</a></li>
                 <li class="download-link nav-item" style="display: none;"><a class="nav-link">Download</a></li>
-                <li class="from-cal nav-item" style="display: none;"><input type="datetime-local" name="to-cal" id="to-cal"></li>
+                <li class="from-cal nav-item" style="display: none;"><input type="datetime-local" name="from-cal" id="from-cal"></li>
                 <li class="to-cal nav-item" style="display: none;"><input type="datetime-local" name="to-cal" id="to-cal"></li>
                 <li class="search-item nav-item" style="display: none;"><input type="text" name="search-item" id="search-item"></li>
+                <li class="submit-item nav-item" style="display: none;"><input type="button" name="submit-item" id="submit-item" value="Apply Changes" onclick="makeChanges()"></li>
 
             </ul>
         </div>
@@ -196,10 +197,27 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    function toPdf() {
-        var element = document.getElementById("element");
-         html2pdf(element);
+    function makeChanges()
+    {
+        let constraintsMet = {}
+        $('#chat').children().hide()
+        let fromDate = new Date($('#from-cal').val());
+        if($('#from-cal').val() == '')
+        {
+            fromDate = 0
+        }
+        let toDate = new Date($('#to-cal').val());
+        if($('#to-cal').val() == '')
+        {
+            toDate = Infinity
+        }
+        $('#chat').children().each(function(_, item){
+            if(new Date($($(item).children()[5]).text())>=fromDate && new Date($($(item).children()[5]).text())<=toDate && $($(item).children()[1]).text().toLowerCase().indexOf($('#search-item').val().toLowerCase()) != -1)
+            {
+                $(item).show()
+            }
+        })
     }
-    
+
 </script>
 </html>

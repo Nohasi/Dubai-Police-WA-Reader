@@ -66,6 +66,7 @@ function uploadFiles(event) {
                 from_cal.show();
                 to_cal.show();
                 search_item.show();
+                submit_item.show();
 
                 console.log("Chat Block count:" + response.chat.length);
                 console.log("Users count:" + response.users.length);
@@ -81,10 +82,10 @@ function uploadFiles(event) {
                     if (chat_user_index == 1)
                         $("#" + chat_div_id).addClass("alternate-user");
 
-                    if (last_user_index != chat_user_index) {
+                    //if (last_user_index != chat_user_index) {
                         $("div.user", "#" + chat_div_id).text(response.users[chat_user_index]);
                         $("#" + chat_div_id).addClass("new-user-block");
-                    }
+                    //}
 
                     if (response.attachments == true){
                         temp_str = response.chat[chat_index].p
@@ -175,6 +176,11 @@ var files,
     error_div = $('#error_message_box'),
     back_nav = $('li.nav-back'),
     download_link = $('li.download-link'),
-    from_cal = $('li.from-cal')
-    to_cal = $('li.to-cal')
-    search_item = $('li.search-item');
+    from_cal = $('li.from-cal'),
+    to_cal = $('li.to-cal'),
+    search_item = $('li.search-item'),
+    submit_item = $('li.submit-item');
+
+
+
+      
