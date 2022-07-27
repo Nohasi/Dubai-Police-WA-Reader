@@ -46,11 +46,17 @@
                     <span class="label-wrap"><span class="label options-label" name="options-label" id="options-label">Filter Options</span></span>
                     <input type="checkbox" name="options-checkbox" id="options-checkbox" value="Advanced Options">
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <li class="nav-item dropdown" style="display: none;">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Participants</a>
                     <div class="dropdown-menu user-list" id="user-list">
                       <!--<p class="dropdown-item" href="#">Hamad Al Hammadi <input type="text"/></p>-->
                     </div>
+                </li>
+                <li class="nav-item show-selected" style="display: none">
+                    <input type="button" name="show-selected" id="show-selected" value="Only Show Selected Messages" onclick="showSelected()">
+                </li>
+                <li class="nav-item show-all" style="display: none;">
+                    <input type="button" name="show-all" id="show-all" value="Show All Messages" onclick="showAll()">
                 </li>
             </ul>
         </div>
@@ -140,7 +146,15 @@
             document.getElementById("submit-item").click();
         }
     });
-
+    function showAll() {
+        show_all = $('li.show-all')
+        show_selected = $('li.show-selected')
+        show_selected.show();
+        show_all.hide();
+        $('#chat').children().each(function(_, item){
+            $(item).show() 
+        })
+    }
     function makeChanges()
     {
         let constraintsMet = {}
@@ -160,6 +174,25 @@
             {
                 $(item).show()
             }
+        })
+    }
+
+    function showSelected(){
+        let i = 0;
+        show_all = $('li.show-all')
+        show_selected = $('li.show-selected')
+        show_selected.hide();
+        show_all.show();
+        $('#chat').children().each(function(_, item){
+            if($(document.getElementById("c"+i)).is(':checked'))
+            {
+                $(item).show()
+            }
+            else
+            {
+                $(item).hide()
+            }
+            i++;
         })
     }
 

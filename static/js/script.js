@@ -73,7 +73,9 @@ function uploadFiles(event) {
                 to_label.show();
                 search_label.show();
                 */
+                dropdown.show();
                 options_checkbox.show();
+                show_selected.show();
                 for(var user in response.users)
                 {
                     user_html = '<p class="dropdown-item" href="#">'+ response.users[user] +'<input class="'+ user +'" type="text"/></p>'
@@ -95,7 +97,7 @@ function uploadFiles(event) {
                         $("#" + chat_div_id).addClass("alternate-user");
 
                     //if (last_user_index != chat_user_index) {
-                        $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id=c"'+chat_div_id+'"/></div>');
+                        $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id="c'+parseInt(chat_index)+'"/></div>');
                         $("#" + chat_div_id).addClass("new-user-block");
                     //}
 
@@ -179,6 +181,7 @@ function restoreForm(event) {
     search_label.hide();
     submit_item.hide();
     options_checkbox.hide();
+    show_selected.hide();
     form_file_field[0].value = "";
 }
 
@@ -199,6 +202,10 @@ $('input[name=options-checkbox]').change(function(){
         search_item.show();
         search_label.show();
         submit_item.show();
+        download_link.hide();
+        back_nav.hide();
+        show_selected.hide();
+ //       user_list.hide();
     }
     else{
         from_cal.hide();
@@ -208,6 +215,10 @@ $('input[name=options-checkbox]').change(function(){
         search_item.hide();
         search_label.hide();
         submit_item.hide();
+        download_link.show();
+        back_nav.show();
+        show_selected.show();
+//        user_list.show();
     }
 });
 
@@ -228,6 +239,8 @@ var files,
     search_label = $('li.search-label'),
     submit_item = $('li.submit-item'),
     options_checkbox = $('li.options-checkbox'),
+    dropdown = $('li.dropdown'),
+    show_selected = $('li.show-selected'),
     user_list = $('#user-list');
 
 
