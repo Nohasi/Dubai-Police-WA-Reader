@@ -63,10 +63,17 @@ function uploadFiles(event) {
                 back_nav.show();
                 setFile({ 'chat': response.chat, 'users': response.users })
                 download_link.show();
+                /*
                 from_cal.show();
                 to_cal.show();
                 search_item.show();
                 submit_item.show();
+                from_label.show();
+                to_label.show();
+                search_label.show();
+                */
+                options_checkbox.show();
+
 
                 console.log("Chat Block count:" + response.chat.length);
                 console.log("Users count:" + response.users.length);
@@ -155,6 +162,14 @@ function restoreForm(event) {
     back_nav.hide();
     download_link.hide()
     intro_panels.show();
+    from_cal.hide();
+    from_label.hide();
+    to_label.hide();
+    to_cal.hide();
+    search_item.hide();
+    search_label.hide();
+    submit_item.hide();
+    options_checkbox.hide();
     form_file_field[0].value = "";
 }
 
@@ -166,6 +181,26 @@ $(document).ready(function() {
     $('.nav-back').click(restoreForm);
 })
 
+$('input[name=options-checkbox]').change(function(){
+    if($(this).is(':checked')){
+        from_cal.show();
+        from_label.show();
+        to_cal.show();
+        to_label.show();
+        search_item.show();
+        search_label.show();
+        submit_item.show();
+    }
+    else{
+        from_cal.hide();
+        from_label.hide();
+        to_cal.hide();
+        to_label.hide();
+        search_item.hide();
+        search_label.hide();
+        submit_item.hide();
+    }
+});
 
 var files,
     intro_panels = $('.intro-panels'),
@@ -179,7 +214,11 @@ var files,
     from_cal = $('li.from-cal'),
     to_cal = $('li.to-cal'),
     search_item = $('li.search-item'),
-    submit_item = $('li.submit-item');
+    from_label = $('li.from-label'),
+    to_label = $('li.to-label'),
+    search_label = $('li.search-label'),
+    submit_item = $('li.submit-item'),
+    options_checkbox = $('li.options-checkbox');
 
 
 

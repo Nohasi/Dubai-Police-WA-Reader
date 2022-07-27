@@ -162,3 +162,36 @@ img {
 #accordion .card .card-header {
     cursor: pointer;
 }
+
+.navbar-logo {
+    background-image: url('/static/img/Dubai_police_logo_green.png');
+    width: 90px;
+    height: 90px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    z-index: 1051;
+  }
+
+  .navbar-inverse.nav-upper {
+    height: 50px;
+  }
+  .navbar-inverse.nav-upper ul {
+    float: right;
+    display: table;
+  }
+  .navbar-inverse.nav-upper .navbar-upper > li {
+    display: table-cell;
+    font-size: 14px;
+  }
+  .navbar-inverse.nav-upper .navbar-upper > li > a {
+    color: #018657;
+  }
+  @media (min-width: 768px) {
+    .navbar.navbar-lower .navbar-nav {
+      margin-left: 100px;
+    }
+  }
