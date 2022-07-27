@@ -1,5 +1,5 @@
 var currentFile = {},
-    file_extensions_img = ['jpg', 'png'],
+    file_extensions_img = ['jpg', 'png', 'webp'],
     file_extensions_audio = ['opus'],
     file_extensions_video = ['mp4'];
 
@@ -61,6 +61,7 @@ function uploadFiles(event) {
             if (response.success) {
                 intro_panels.hide();
                 back_nav.show();
+                user_list.empty();
                 setFile({ 'chat': response.chat, 'users': response.users })
                 download_link.show();
                 /*
@@ -73,8 +74,12 @@ function uploadFiles(event) {
                 search_label.show();
                 */
                 options_checkbox.show();
-
-
+                for(var user in response.users)
+                {
+                    user_html = '<p class="dropdown-item" href="#">'+ response.users[user] +'<input class="'+ user +'" type="text"/></p>'
+                    user_list.append(user_html);
+                }
+                
                 console.log("Chat Block count:" + response.chat.length);
                 console.log("Users count:" + response.users.length);
                 console.log("Are attachments present:" + response.attachments);
@@ -83,14 +88,14 @@ function uploadFiles(event) {
                 for (var chat_index in response.chat) {
                     var chat_div_id = "chatBox" + chat_index,
                         chat_user_index = response.chat[chat_index].i,
-                        chat_html = '<div class="aloo" id="' + chat_div_id + '"><div class="user"></div><div class="text"></div><div class="image_holder"></div><div class="video_holder"></div><div class="audio_holder"></div><div class="time"></div></div>';
+                        chat_html = '<div class="aloo" id="' + chat_div_id + '"><div class="user" style="position:relative;"></div><div class="text"></div><div class="image_holder"></div><div class="video_holder"></div><div class="audio_holder"></div><div class="time"></div></div>';
 
                     chat_div.append(chat_html);
                     if (chat_user_index == 1)
                         $("#" + chat_div_id).addClass("alternate-user");
 
                     //if (last_user_index != chat_user_index) {
-                        $("div.user", "#" + chat_div_id).text(response.users[chat_user_index]);
+                        $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id=c"'+chat_div_id+'"/></div>');
                         $("#" + chat_div_id).addClass("new-user-block");
                     //}
 
@@ -108,16 +113,19 @@ function uploadFiles(event) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
                             } else {
                                 console.log("Unknown attachment type " + file_extension)
-                                $("div.text", "#" + chat_div_id).text("Unable to handle this attachment yet");
+                                $("div.text", "#" + chat_div_id).html("<a href='" + file_path +"'>Unsupported Attachment</a>");
                             }
                         } else {
                             $("div.text", "#" + chat_div_id).text(response.chat[chat_index].p);
                         }
-                    } else {
+                    } else
+                    {
                         arr_links = linkify.find(response.chat[chat_index].p);
-                        if (arr_links.length > 0){
+                        if (arr_links.length > 0)
+                        {
                             textline = response.chat[chat_index].p;
-                            for (var i = 0, l = arr_links.length; i < l; i++) {
+                            for (var i = 0, l = arr_links.length; i < l; i++)
+                            {
                                 textline = textline.replace(arr_links[i].value, '<a href="'+arr_links[i].href+'" target="_blank">'+arr_links[i].value+'</a>')    
                             }
                             $("div.text", "#" + chat_div_id).html(textline);
@@ -138,7 +146,8 @@ function uploadFiles(event) {
             error_message = 'Some technical glitch! Please retry after reloading the page!';
             show_error_message(error_message);
         },
-        beforeSend: function() {
+        beforeSend: function()
+        {
             submit_button.val('Processing...');
             submit_button.attr('disabled', '');
 
@@ -147,7 +156,7 @@ function uploadFiles(event) {
         complete: function() {
             submit_button.val('Get Conversation');
             submit_button.removeAttr('disabled');
-
+            user_list.append("<input type='button' value='Apply Changes' onclick='MakeChangesForName()'/> ");
             file_input.removeAttr('disabled');
             $('#chat').minEmoji();
         }
@@ -218,7 +227,8 @@ var files,
     to_label = $('li.to-label'),
     search_label = $('li.search-label'),
     submit_item = $('li.submit-item'),
-    options_checkbox = $('li.options-checkbox');
+    options_checkbox = $('li.options-checkbox'),
+    user_list = $('#user-list');
 
 
 
