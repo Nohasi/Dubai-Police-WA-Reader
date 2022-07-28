@@ -147,6 +147,7 @@
         }
     });
     function showAll() {
+        btn = 'selected'
         show_all = $('li.show-all')
         show_selected = $('li.show-selected')
         show_selected.show();
@@ -179,6 +180,7 @@
 
     function showSelected(){
         let i = 0;
+        btn = 'all';
         show_all = $('li.show-all')
         show_selected = $('li.show-selected')
         show_selected.hide();

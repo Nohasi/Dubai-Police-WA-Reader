@@ -165,6 +165,14 @@ function uploadFiles(event) {
     });
 }
 
+let btn = null;
+if(window.getComputedStyle(document.getElementById('show-all')).display === 'none'){
+    btn = 'all';
+}
+else{
+    btn = 'selected';
+}
+
 
 function restoreForm(event) {
     event.preventDefault();
@@ -205,6 +213,7 @@ $('input[name=options-checkbox]').change(function(){
         download_link.hide();
         back_nav.hide();
         show_selected.hide();
+        show_all.hide();
  //       user_list.hide();
     }
     else{
@@ -217,7 +226,13 @@ $('input[name=options-checkbox]').change(function(){
         submit_item.hide();
         download_link.show();
         back_nav.show();
-        show_selected.show();
+        if(btn === 'selected'){
+            show_selected.show();
+        }
+        else {
+            show_all.show();
+        }
+        
 //        user_list.show();
     }
 });
@@ -241,6 +256,7 @@ var files,
     options_checkbox = $('li.options-checkbox'),
     dropdown = $('li.dropdown'),
     show_selected = $('li.show-selected'),
+    show_all = $('li.show-all'),
     user_list = $('#user-list');
 
 
