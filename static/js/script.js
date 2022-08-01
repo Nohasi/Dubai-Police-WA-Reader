@@ -78,8 +78,16 @@ function uploadFiles(event) {
                 show_selected.show();
                 for(var user in response.users)
                 {
-                    user_html = '<p class="dropdown-item" href="#">'+ response.users[user] +'<input class="'+ user +'" type="text"/></p>'
-                    user_list.append(user_html);
+                    if(user == 1)
+                    {
+                        user_html = '<p class="dropdown-item" href="#">'+ response.users[user] +'<input class="'+ user +'" type="text"/><input type="radio" name="phoneHolder" id="p'+ user +'" checked/> <span class="selectedUserSpan" id="selectedUser'+user+'">(Current Phone Holder)</span> </p>'
+                        user_list.append(user_html);
+                    }
+                    else
+                    {
+                        user_html = '<p class="dropdown-item" href="#">'+ response.users[user] +'<input class="'+ user +'" type="text"/><input type="radio" name="phoneHolder" id="p'+ user +'"/> <span class="selectedUserSpan" id="selectedUser'+user+'" style="display:none;">(Current Phone Holder)</span> </p>'
+                        user_list.append(user_html);
+                    }
                 }
                 
                 console.log("Chat Block count:" + response.chat.length);
@@ -90,7 +98,7 @@ function uploadFiles(event) {
                 for (var chat_index in response.chat) {
                     var chat_div_id = "chatBox" + chat_index,
                         chat_user_index = response.chat[chat_index].i,
-                        chat_html = '<div class="aloo" id="' + chat_div_id + '"><div class="user" style="position:relative;"></div><div class="text"></div><div class="image_holder"></div><div class="video_holder"></div><div class="audio_holder"></div><div class="time"></div></div>';
+                        chat_html = '<div class="aloo user'+chat_user_index+'" id="' + chat_div_id + '"><div class="user" style="position:relative;"></div><div class="text"></div><div class="image_holder"></div><div class="video_holder"></div><div class="audio_holder"></div><div class="time"></div></div>';
 
                     chat_div.append(chat_html);
                     if (chat_user_index == 1)
@@ -103,18 +111,19 @@ function uploadFiles(event) {
 
                     if (response.attachments == true){
                         temp_str = response.chat[chat_index].p
-                        if (response.chat[chat_index].m){
+                        if (response.chat[chat_index].m)
+                        {
                             file_path = response.chat[chat_index].mp
                             file_extension = file_path.split('.').pop();
-
+                        
                             if (file_type_checker(file_extension, file_extensions_video) == true) {
-                                $("div.video_holder", "#" + chat_div_id).html("<video controls><source src='" + file_path +"' type='video/mp4'>Your browser does not support the video tag.</video>")
+                                $("div.video_holder", "#" + chat_div_id).html("<video controls><source src='" + file_path + "' type='video/mp4'>Your browser does not support the video tag.</video>")
                             } else if (file_type_checker(file_extension, file_extensions_audio) == true) {
-                                $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path +"' type='audio/aac'>Your browser does not support the audio tag.</audio>")
+                                $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
                             } else if (file_type_checker(file_extension, file_extensions_img) == true) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
                             } else {
-                                console.log("Unknown attachment type " + file_extension)
+                                console.log("Unknown attachment type" + file_extension)
                                 $("div.text", "#" + chat_div_id).html("<a href='" + file_path +"'>Unsupported Attachment</a>");
                             }
                         } else {

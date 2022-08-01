@@ -4,19 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Prabhakar Gupta">
+    <meta name="author" content="Dubai Police">
     <meta property="og:site_name" content="Dubai Police WhatsApp Reader"/>
     <meta property="og:title" content="Dubai Police WhatsApp Reader"/>
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="{{ url_for('static', filename='img/Dubai_police_logo.png') }}"/>
     <meta property="og:description" content="WA Reader is a web-tool aimed to help users view their WhatsApp back-up chats in a familiar user-interface."/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/minEmoji2.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
     <title>Dubai Police WhatsApp Reader</title>
-    <script data-ad-client="ca-pub-1799032661457310" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <div id="element">
@@ -41,7 +40,7 @@
                     <span class="label-wrap"><span class="label search-label" name="search-label" id="search-label">Search keyword:</span></span>
                     <input type="text" name="search-item" id="search-item">
                 </li>
-                <li class="submit-item nav-item" style="display: none; position:relative; top:23px; left: -50px;"><input type="button" name="submit-item" id="submit-item" value="Apply Changes" onclick="makeChanges()"></li>
+                <li class="submit-item nav-item" style="display: none; position:relative;"><input type="button" name="submit-item" id="submit-item" value="Apply Changes" onclick="makeChanges()"></li>
                 <li class="options-checkbox nav-item" style="display:none; position: relative; top:8px;">
                     <span class="label-wrap"><span class="label options-label" name="options-label" id="options-label">Filter Options</span></span>
                     <input type="checkbox" name="options-checkbox" id="options-checkbox" value="Advanced Options">
@@ -49,7 +48,6 @@
                 <li class="nav-item dropdown" style="display: none;">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Participants</a>
                     <div class="dropdown-menu user-list" id="user-list">
-                      <!--<p class="dropdown-item" href="#">Hamad Al Hammadi <input type="text"/></p>-->
                     </div>
                 </li>
                 <li class="nav-item show-selected" style="display: none">
@@ -116,11 +114,11 @@
         <div class="col-md-12" id="chat"></div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jMinEmoji2.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-linkify/2.1.9/linkify.min.js" integrity="sha512-kxj7VjlzsQgiku2vbRcZI0FJ0dXmPsiRLugiRxJrCROusKHaFfX/hGDD1/L/R0Y+xI8zlA2B5nm6USapz7nQbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ url_for('static', filename='js/linkify.min.js') }}" integrity="sha512-kxj7VjlzsQgiku2vbRcZI0FJ0dXmPsiRLugiRxJrCROusKHaFfX/hGDD1/L/R0Y+xI8zlA2B5nm6USapz7nQbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% if data['is_prod'] %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57220954-4"></script>
     <script>
@@ -137,7 +135,6 @@
 {% endif %}
 </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     var searchInput = document.getElementById("search-item");
     searchInput.addEventListener("keypress", function(event){
@@ -178,7 +175,8 @@
         })
     }
 
-    function showSelected(){
+    function showSelected()
+    {
         let i = 0;
         btn = 'all';
         show_all = $('li.show-all')
@@ -202,26 +200,31 @@
     {
         let arr = $('#user-list').children();
         let size = arr.length-1;
-
+        
         for(var j = 0; j < size; j++)
         {
             let inp = $('.'+j)[0]
             console.log(inp)
-            
-                let tags = document.querySelectorAll('.u'+j);
-                for (let i = 0; i < tags.length; i++)
+            if($('#p'+j).prop('checked'))
+            {
+                $(".selectedUserSpan").hide()
+                $('#selectedUser'+j).show()
+                jQuery('.aloo').removeClass("alternate-user");
+                $('.user'+j).addClass("alternate-user")
+            }
+            let tags = document.querySelectorAll('.u'+j);
+            for (let i = 0; i < tags.length; i++)
+            {
+                if(inp.value!="")
                 {
-                    if(inp.value!="")
-                    {
-                        tags[i].innerHTML = " ("+inp.value+") "; 
-                    }
-                    else
-                    {
-                        tags[i].innerHTML = ""; 
-                    }
-                      
+                    tags[i].innerHTML = " ("+inp.value+") "; 
                 }
-            
+                else
+                {
+                    tags[i].innerHTML = ""; 
+                }
+                    
+            }
         }
     }
 
