@@ -10,10 +10,10 @@
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="{{ url_for('static', filename='img/Dubai_police_logo.png') }}"/>
     <meta property="og:description" content="WA Reader is a web-tool aimed to help users view their WhatsApp back-up chats in a familiar user-interface."/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"  crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/minEmoji2.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}"  crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
     <title>Dubai Police WhatsApp Reader</title>
 </head>
@@ -29,31 +29,31 @@
                 <li class="nav-item nav-back" style="display:none;"><a class="nav-link"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> View another chat</a></li>
                 <li class="download-link nav-item" style="display: none;"><a class="nav-link" style="margin-right: 10px;">Download JSON</a></li>
                 <li class="from-cal nav-item" style="display: none;">
-                    <span class="label-wrap"><span class="label from-label" name="from-label" id="from-label">Date from:</span></span>
+                    <span class="label from-label" name="from-label" id="from-label">Date from:</span>
                     <input type="datetime-local" name="from-cal" id="from-cal">
                 </li>
-                <li class="to-cal nav-item" style="display: none; position: relative; left: -10px;">
-                    <span class="label-wrap"><span class="label to-label" name="to-label" id="to-label">Date to:</span></span>
+                <li class="to-cal nav-item" style="display: none; position: relative; left: 10px;">
+                    <span class="label to-label" name="to-label" id="to-label">Date to:</span>
                     <input type="datetime-local" name="to-cal" id="to-cal">
                 </li>
-                <li class="search-item nav-item" style="display: none;">
-                    <span class="label-wrap"><span class="label search-label" name="search-label" id="search-label">Search keyword:</span></span>
+                <li class="search-item nav-item" style="display: none; position:relative; left: 10px;">
+                    <span class="label search-label" name="search-label" id="search-label">Search keyword:</span>
                     <input type="text" name="search-item" id="search-item">
                 </li>
                 <li class="submit-item nav-item" style="display: none; position:relative;"><input type="button" name="submit-item" id="submit-item" value="Apply Changes" onclick="makeChanges()"></li>
                 <li class="options-checkbox nav-item" style="display:none; position: relative; top:8px;">
-                    <span class="label-wrap"><span class="label options-label" name="options-label" id="options-label">Filter Options</span></span>
+                    <span class="label options-label" name="options-label" id="options-label">Filter Options</span>
                     <input type="checkbox" name="options-checkbox" id="options-checkbox" value="Advanced Options">
                 </li>
-                <li class="nav-item dropdown" style="display: none;">
+                <li class="nav-item dropdown" style="display: none; position: relative; left:10px;">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Participants</a>
                     <div class="dropdown-menu user-list" id="user-list">
                     </div>
                 </li>
-                <li class="nav-item show-selected" style="display: none">
+                <li class="nav-item show-selected" style="display: none; position: relative; left:10px;">
                     <input type="button" name="show-selected" id="show-selected" value="Only Show Selected Messages" onclick="showSelected()">
                 </li>
-                <li class="nav-item show-all" style="display: none;">
+                <li class="nav-item show-all" style="display: none; position: relative; left:10px;">
                     <input type="button" name="show-all" id="show-all" value="Show All Messages" onclick="showAll()">
                 </li>
             </ul>
@@ -115,10 +115,10 @@
     </div>
 </div>
 <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"  crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jMinEmoji2.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-<script src="{{ url_for('static', filename='js/linkify.min.js') }}" integrity="sha512-kxj7VjlzsQgiku2vbRcZI0FJ0dXmPsiRLugiRxJrCROusKHaFfX/hGDD1/L/R0Y+xI8zlA2B5nm6USapz7nQbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ url_for('static', filename='js/linkify.min.js') }}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% if data['is_prod'] %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57220954-4"></script>
     <script>

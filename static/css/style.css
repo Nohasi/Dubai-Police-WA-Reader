@@ -190,8 +190,22 @@ img {
   .navbar-inverse.nav-upper .navbar-upper > li > a {
     color: #018657;
   }
-  @media (min-width: 768px) {
-    .navbar.navbar-lower .navbar-nav {
-      margin-left: 100px;
+  @media (min-width:768px) { 
+    .navbar-nav .label-wrap {
+        clear: both;
+        float: left;
+        height:auto;
+        position: static;
+        width: 100%;
+        text-align: center;
+        margin-top: -10px;
+        padding-bottom: 10px;
     }
-  }
+}
+
+.navbar-nav .label-wrap {
+    position: absolute;
+    right: 40px;
+    top: 8px;
+    height: 10px;
+}

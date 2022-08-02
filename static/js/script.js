@@ -199,6 +199,7 @@ function restoreForm(event) {
     submit_item.hide();
     options_checkbox.hide();
     show_selected.hide();
+    dropdown.hide();
     form_file_field[0].value = "";
 }
 
