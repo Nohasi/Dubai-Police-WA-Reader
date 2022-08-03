@@ -124,7 +124,7 @@ function uploadFiles(event) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
                             } else {
                                 console.log("Unknown attachment type" + file_extension)
-                                $("div.text", "#" + chat_div_id).html("<a href='" + file_path +"'>Unsupported Attachment</a>");
+                                $("div.text", "#" + chat_div_id).html("<a href='" + file_path +"'>Unsupported Attachment: "+file_path + "</a>");
                             }
                         } else {
                             $("div.text", "#" + chat_div_id).text(response.chat[chat_index].p);

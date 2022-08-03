@@ -34,25 +34,23 @@ def is_media_string(chat_string):
     return False, None
 
 
-def get_media_path(text_string, media_flag, platform="android"):
+def get_media_path(text_string, media_flag, platform="android", media_message=""):
     if media_flag:
         if platform == "android":
-            for text_segment in text_string.split():
-                tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", ""))
-                print(tmp_filepath)
-                if os.path.exists(tmp_filepath):
-                    return tmp_filepath[1:]
-        else:
-            text_segment = text_string[text_string.index("<"):]
-            text_segment = re.search(r'<(.*?)>',text_segment).group(1)
-            text_segment = text_segment.split()[1].strip()
+            print(text_string)
+            text_segment =  text_string.partition(media_message)[0]
             tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", ""))
             print(tmp_filepath)
             if os.path.exists(tmp_filepath):
                 return tmp_filepath[1:]
-
-
-
+        else:
+            text_segment = text_string[text_string.index("<"):]
+            text_segment = re.search(r'<(.*?)>',text_segment).group(1)
+            text_segment = text_segment.partition(" ")[-1].strip()
+            tmp_filepath = os.path.join("./static/chat", text_segment.strip().replace("\u200e", "").replace("\u200f", ""))
+            
+            if os.path.exists(tmp_filepath):
+                return tmp_filepath[1:]
 
 def _get_parsed_line(input_line, persons_list, is_media_available=False):
     timestamp_string = None
@@ -94,9 +92,9 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False):
         is_media_string_flag, media_message = is_media_string(text_string)
         if media_message is not None:
             if "<" in media_message:
-                media_path = get_media_path(text_string, is_media_string_flag, "iOS")
+                media_path = get_media_path(text_string, is_media_string_flag, "iOS", media_message)
             else:
-                media_path = get_media_path(text_string, is_media_string_flag, "android")
+                media_path = get_media_path(text_string, is_media_string_flag, "android", media_message)
         if media_path:
             text_string = media_message
 
