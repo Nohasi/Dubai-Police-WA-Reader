@@ -47,7 +47,7 @@ function uploadFiles(event) {
     $.each(files, function(key, value) {
         data.append(key, value);
     });
-
+    data.append("1", $('#DDMMYY').is(':checked'));
     $.ajax({
         url: '/parse-file',
         type: 'POST',

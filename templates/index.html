@@ -89,7 +89,7 @@
                                 <li>To save the chat as a PDF, use ctrl+P, select <strong>Save to PDF</strong> as the destination. Ensure that you have <strong>Print Background</strong> checkbox ticked to maintain the correct formatting.</li>
                             </ol>
                         </p>
-                        <form enctype="multipart/form-data">
+                        <form enctype="multipart/form-data" method="post" action="#">
                             <div class="form-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="form_file_field">
@@ -99,6 +99,7 @@
                             <div class="form-group">
                                 <center>
                                 <input type="submit" class="btn btn-success" id="submit_button" value="Get Conversation" style="background-color:#018657;">
+                                <p><input type="checkbox" id="DDMMYY" name="DDMMYY" >Parse as DD/MM/YY ?</p>
                                 </center>
                             </div>
                         </form>

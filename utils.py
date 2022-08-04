@@ -52,7 +52,7 @@ def get_media_path(text_string, media_flag, platform="android", media_message=""
             if os.path.exists(tmp_filepath):
                 return tmp_filepath[1:]
 
-def _get_parsed_line(input_line, persons_list, is_media_available=False):
+def _get_parsed_line(input_line, persons_list, is_media_available=False, dayfirst=False):
     timestamp_string = None
     for timestamp_splitter in TIMESTAMP_SPLITTERS:
         items = input_line.split(timestamp_splitter)
@@ -67,7 +67,9 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False):
                 dirty_timestamp_string = dirty_timestamp_string.replace(remove_character, "")
 
         try:
-            timestamp_string = parse_datetime(dirty_timestamp_string, dayfirst=True)
+            timestamp_string = parse_datetime(dirty_timestamp_string, dayfirst=dayfirst)
+            #print(timestamp_string)
+            timestamp_string = timestamp_string.strftime("%d %b, %Y %H:%M:%S")
             line = timestamp_splitter.join(items[1:]).strip()
             break
         except (ValueError, OverflowError):
@@ -99,7 +101,7 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False):
             text_string = media_message
 
     
-    timestamp_string = str(timestamp_string)[:-3]
+    timestamp_string = str(timestamp_string)
     #print(timestamp_string)
     chat_string_object = {
         "t": timestamp_string,
@@ -111,7 +113,7 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False):
     return chat_string_object, persons_list
 
 
-def get_parsed_file(filepath, is_media_available=False):
+def get_parsed_file(filepath, is_media_available=False, dayfirst=False):
     if not os.path.exists(filepath):
         raise Exception("File not uploaded properly. Try Again!")
     filename, file_extension = os.path.splitext(filepath)
@@ -131,7 +133,7 @@ def get_parsed_file(filepath, is_media_available=False):
     with open(filepath, "r", encoding='utf-8') as f:
         for line in f:
             try:
-                parsed_line, persons_list = _get_parsed_line(line.strip(), persons_list, is_media_available=is_media_available)
+                parsed_line, persons_list = _get_parsed_line(line.strip(), persons_list, dayfirst=dayfirst, is_media_available=is_media_available)
                 if parsed_line:
                     parsed_chats.append(parsed_line)
             except IndexError:

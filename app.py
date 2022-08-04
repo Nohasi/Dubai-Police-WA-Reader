@@ -19,7 +19,6 @@ def allowed_file(filename):
 @app.route('/parse-file', methods=['POST'])
 def parse_file():
     empty_directory("static/chat")
-
     file_req = request.files
     if len(file_req) == 0:
         response = {
@@ -27,7 +26,14 @@ def parse_file():
             "error_message": "Please upload a file to proceed.",
         }
         return jsonify(response), 200
+
+    if request.form["1"] == 'false':
+        dayfirst = False;
+    else:
+        dayfirst = True
+
     file = file_req['0']
+
     if not allowed_file(file.filename):
         response = {
             "success": False,
@@ -52,7 +58,7 @@ def parse_file():
             attachment_flag = True
 
         try:
-            parsed_items, persons_list = get_parsed_file(tmp_filepath, is_media_available=attachment_flag)
+            parsed_items, persons_list = get_parsed_file(tmp_filepath, is_media_available=attachment_flag, dayfirst=dayfirst)
             response = {
                 "success": True,
                 "chat": parsed_items,
