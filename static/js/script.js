@@ -1,6 +1,8 @@
+//const { Howl } = require("./howler.min");
+
 var currentFile = {},
     file_extensions_img = ['jpg', 'png', 'webp'],
-    file_extensions_audio = ['opus'],
+    file_extensions_audio = ['opus', 'mp3', 'ogg'],
     file_extensions_video = ['mp4'];
 
 function show_error_message(error_message) {
@@ -109,11 +111,6 @@ function uploadFiles(event) {
                         $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id="c'+parseInt(chat_index)+'"/></div>');
                         $("#" + chat_div_id).addClass("new-user-block");
                     }
-
-                    //if (last_user_index != chat_user_index) {
-                        
-                    //}
-
                     if (response.attachments == true){
                         temp_str = response.chat[chat_index].p
                         if (response.chat[chat_index].m)
@@ -124,7 +121,11 @@ function uploadFiles(event) {
                             if (file_type_checker(file_extension, file_extensions_video) == true) {
                                 $("div.video_holder", "#" + chat_div_id).html("<video controls><source src='" + file_path + "' type='video/mp4'>Your browser does not support the video tag.</video>")
                             } else if (file_type_checker(file_extension, file_extensions_audio) == true) {
-                                $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
+
+                                //$("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
+                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" onclick=playAudio("localhost:5000'+file_path.replace("\\", "/")+'")>Play voice note</button>');
+                               
+
                             } else if (file_type_checker(file_extension, file_extensions_img) == true) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
                             } else {
@@ -251,6 +252,7 @@ $('input[name=options-checkbox]').change(function(){
 //        user_list.show();
     }
 });
+
 
 var files,
     intro_panels = $('.intro-panels'),
