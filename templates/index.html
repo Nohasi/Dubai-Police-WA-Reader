@@ -120,6 +120,8 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/jMinEmoji2.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script src="{{ url_for('static', filename='js/linkify.min.js') }}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{url_for('static', filename='js/howler.min.js')}}"></script> <!-- new line -->
+
 {% if data['is_prod'] %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57220954-4"></script>
     <script>

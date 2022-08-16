@@ -4,6 +4,7 @@ import shutil
 from unidecode import unidecode
 from datetime import datetime
 from dateutil.parser import parse as parse_datetime
+from functools import reduce
 import re
 
 from constants import DEFAULT_ERROR_MESSAGE, ATTACHMENT_MESSAGES
@@ -79,8 +80,18 @@ def _get_parsed_line(input_line, persons_list, is_media_available=False, dayfirs
         raise IndexError
     items = line.split(":")
     text_string = ":".join(items[1:]).strip()
+    
     if not text_string:
-        return None, persons_list
+        timestamp_string = str(timestamp_string)
+        #messages are end to end encrypted message not showing bug √ 
+        chat_string_object = {
+            "t": timestamp_string,
+            "p": "".join(items),
+            "i": -1,
+            'm': False,
+            'mp': None,
+        }
+        return chat_string_object, persons_list
 
     user_name = items[0]
     if user_name and user_name not in persons_list:
@@ -133,6 +144,8 @@ def get_parsed_file(filepath, is_media_available=False, dayfirst=False):
     with open(filepath, "r", encoding='utf-8') as f:
         for line in f:
             try:
+                # check if whatsapp encryption message exist, if it is -> save the line as is -> and skip to the next iteration √
+                
                 parsed_line, persons_list = _get_parsed_line(line.strip(), persons_list, dayfirst=dayfirst, is_media_available=is_media_available)
                 if parsed_line:
                     parsed_chats.append(parsed_line)

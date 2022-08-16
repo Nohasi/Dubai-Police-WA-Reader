@@ -104,9 +104,14 @@ function uploadFiles(event) {
                     if (chat_user_index == 1)
                         $("#" + chat_div_id).addClass("alternate-user");
 
-                    //if (last_user_index != chat_user_index) {
+                    if(chat_user_index != -1)
+                    {
                         $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id="c'+parseInt(chat_index)+'"/></div>');
                         $("#" + chat_div_id).addClass("new-user-block");
+                    }
+
+                    //if (last_user_index != chat_user_index) {
+                        
                     //}
 
                     if (response.attachments == true){

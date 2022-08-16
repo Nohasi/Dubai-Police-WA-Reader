@@ -10,3 +10,7 @@ ATTACHMENT_MESSAGES = [
     "<attached:",
     "<المُرفق:",
 ]
+
+ENCRYPTION_MESSAGES = [
+    ""
+]
