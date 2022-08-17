@@ -144,9 +144,9 @@
         let result = file_path.replace("\\", "/");
         var sound = new Howl({
             src: [result],
-            html5: true
+            
         });
-        console.log(sound)
+        console.log(file_path)
         sound.play();
     }
     var searchInput = document.getElementById("search-item");

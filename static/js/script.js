@@ -123,7 +123,7 @@ function uploadFiles(event) {
                             } else if (file_type_checker(file_extension, file_extensions_audio) == true) {
 
                                 //$("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
-                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" onclick=playAudio("localhost:5000'+file_path.replace("\\", "/")+'")>Play voice note</button>');
+                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" onclick=playAudio("'+file_path.replace("\\", "/")+'")>Play voice note</button>');
                                
 
                             } else if (file_type_checker(file_extension, file_extensions_img) == true) {
