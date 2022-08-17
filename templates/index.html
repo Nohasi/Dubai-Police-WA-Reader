@@ -167,6 +167,16 @@
 </div>
 </body>
 <script>
+
+    function playAudio(file_path){
+        let result = file_path.replace("\\", "/");
+        var sound = new Howl({
+            src: [result],
+            
+        });
+        console.log(file_path)
+        sound.play();
+    }
     var searchInput = document.getElementById("search-item");
     searchInput.addEventListener("keypress", function(event){
         if(event.key === "Enter"){
