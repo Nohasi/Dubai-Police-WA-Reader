@@ -237,6 +237,10 @@
         })
     }
 
+    $("#exampleModalCenter").on('hidden.bs.modal', function (e) {
+        $("iframe").attr("src", "");
+    });
+
     function MakeChangesForName()
     {
         let arr = $('#user-list').children();
@@ -271,6 +275,7 @@
 
     function playAudio(file_path){
         //open frame of path audioplayer/file_path
+        
         $('#audioframe').attr("src", "/audioplayer"+file_path);
     }
 

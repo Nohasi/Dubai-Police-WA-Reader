@@ -78,7 +78,7 @@ def parse_file():
 
 @app.route('/', methods=['GET'])
 def main():
-    empty_directory("static/chat")
+    #empty_directory("static/chat")
     ctx = {
         'is_prod': IS_PROD,
         'default_error_message': DEFAULT_ERROR_MESSAGE,

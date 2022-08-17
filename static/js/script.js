@@ -134,7 +134,7 @@ function uploadFiles(event) {
                             } else if (file_type_checker(file_extension, file_extensions_audio) == true) {
 
                                 // $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
-                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" class="btn btn-primary" onclick=playAudio("'+file_path+'") data-toggle="modal" data-target="#exampleModalCenter">Play Audio</button>')
+                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" class="btn btn-primary" onclick=playAudio("'+file_path.replace("\\", "/")+'") data-toggle="modal" data-target="#exampleModalCenter">Play Audio</button>')
 
                             } else if (file_type_checker(file_extension, file_extensions_img) == true) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
