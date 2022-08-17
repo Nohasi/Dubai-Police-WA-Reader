@@ -89,10 +89,9 @@ def main():
     else:
         return render_template("index.html", data=ctx)
 
-@app.route('/pdf', methods=['GET'])
-def make_pdf():
-    #TODO this stuff
-    return
+@app.route('/audioplayer/<path:link>', methods=['GET'])
+def run_audio(link):
+    return render_template("indexPlayer.html", link=link)
 
 @app.errorhandler(404)
 def not_found(e):

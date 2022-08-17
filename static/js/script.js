@@ -109,6 +109,10 @@ function uploadFiles(event) {
                         $("div.user", "#" + chat_div_id).html(response.users[chat_user_index]+'<div style="display:inline;" class=u'+chat_user_index+'></div>'+'<div style="display:inline;"><input type="checkbox" style="display:inline; position:absolute; top:0; right:0" id="c'+parseInt(chat_index)+'"/></div>');
                         $("#" + chat_div_id).addClass("new-user-block");
                     }
+                    else
+                    {
+                        $("#"+chat_div_id).addClass("fullwidth")
+                    }
 
                     //if (last_user_index != chat_user_index) {
                         
@@ -124,7 +128,9 @@ function uploadFiles(event) {
                             if (file_type_checker(file_extension, file_extensions_video) == true) {
                                 $("div.video_holder", "#" + chat_div_id).html("<video controls><source src='" + file_path + "' type='video/mp4'>Your browser does not support the video tag.</video>")
                             } else if (file_type_checker(file_extension, file_extensions_audio) == true) {
-                                $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
+                                // $("div.audio_holder", "#" + chat_div_id).html("<audio controls><source src='" + file_path + "' type='audio/aac'>Your browser does not support the audio tag.</audio>")
+                                $("div.audio_holder", "#" + chat_div_id).html('<button type="button" class="btn btn-primary" onclick=playAudio("'+file_path+'") data-toggle="modal" data-target="#exampleModalCenter">Play Audio</button>')
+
                             } else if (file_type_checker(file_extension, file_extensions_img) == true) {
                                 $("div.image_holder", "#" + chat_div_id).html("<img src='" + file_path +"' />")
                             } else {

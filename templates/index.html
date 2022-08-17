@@ -15,6 +15,15 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/minEmoji2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}"  crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"/>
+    <style>
+        iframe 
+        {
+            border: none;
+        }
+        .fullwidth{
+            width: 100%;
+        }
+    </style>
     <title>Dubai Police WhatsApp Reader</title>
 </head>
 <body>
@@ -111,6 +120,25 @@
     </div>
 </div>
 <div class="container-fluid">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Audio Player</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <iframe src="" id="audioframe" frameborder="0" height="600" width="450" style="position: relative; background: transparent; height:100%; width:100%"></iframe>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
     <div class="row" id="whatsapp-conversation">
         <div class="col-md-12" id="chat"></div>
     </div>
@@ -229,6 +257,11 @@
                     
             }
         }
+    }
+
+    function playAudio(file_path){
+        //open frame of path audioplayer/file_path
+        $('#audioframe').attr("src", "/audioplayer"+file_path);
     }
 
 </script>
